@@ -3,37 +3,24 @@ package com.example.cst2335_finalproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.DialogFragment;
 
-import android.os.AsyncTask;
+import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-
-public class SearchActivity extends BaseActivity {
-
-    /**
-     * Global variables
-     */
-    NASAItem nasaItem;
+public class SearchActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,69 +39,39 @@ public class SearchActivity extends BaseActivity {
         drawer.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-        //Navigation View
+        // Navigation View
         NavigationView navigation = findViewById(R.id.navigation);
         navigation.setNavigationItemSelectedListener(this);
 
-        /**
-         * Initialize NasaAPI AsyncTask with date chosen
-         */
-        NasaAPI nasaAPI = new NasaAPI();
-        nasaAPI.execute("https://api.nasa.gov/planetary/apod?api_key=DgPLcIlnmN0Cwrzcg3e9NraFaYLIDI68Ysc6Zh3d&date=2020-02-01");
+        // Open DatePicker with datePickerButton
+        Button button = findViewById(R.id.datePickerButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getSupportFragmentManager(), "Date picker");
+            }
+        });
     }
 
     /**
-     * Queries NASA API in the background
+     * When date is chosen in the DatePicker, format the date and pass it to ResultActivity
+     * @param datePicker
+     * @param year
+     * @param month
+     * @param day
      */
-    private class NasaAPI extends AsyncTask <String, Integer, String> {
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        String chosenDate = new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime());
 
-        @Override
-        protected String doInBackground(String... args) {
-
-            try {
-                URL url = new URL(args[0]);
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                InputStream response = urlConnection.getInputStream();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
-                StringBuilder sb = new StringBuilder();
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line + "\n");
-                }
-                String result = sb.toString();
-
-                // Create JSON object from result
-                JSONObject nasaJSON = new JSONObject(result);
-
-                // Cast attributes into a new NASAItem object
-                String title = nasaJSON.getString("title");
-                String explanation = nasaJSON.getString("explanation");
-                URL imageURL = new URL(nasaJSON.getString("hdurl"));
-                nasaItem = new NASAItem(title, explanation, imageURL);
-
-                publishProgress(1);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return "Done";
-        }
-
-        /**
-         * Update TextViews with nasaItem attributes
-         * @param values
-         */
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-            TextView nasaItemTitle = findViewById(R.id.nasaItemTitle);
-            TextView nasaItemExplanation = findViewById(R.id.nasaItemExplanation);
-            TextView nasaItemImageURL = findViewById(R.id.nasaItemImageURL);
-            nasaItemTitle.setText(nasaItem.getTitle());
-            nasaItemExplanation.setText(nasaItem.getExplanation());
-            nasaItemImageURL.setText((nasaItem.getImageURL().toString()));
-        }
+        Intent resultPage = new Intent(this, ResultActivity.class)
+                .putExtra("date", chosenDate);
+        startActivity(resultPage);
     }
 
     /**
