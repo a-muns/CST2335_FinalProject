@@ -35,6 +35,7 @@ public class SearchActivity extends BaseActivity {
 
         //Navigation View
         NavigationView navigation = findViewById(R.id.navigation);
+        navigation.setNavigationItemSelectedListener(this);
     }
 
     /**

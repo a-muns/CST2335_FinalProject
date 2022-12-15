@@ -7,11 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -40,6 +43,7 @@ public class HomeActivity extends BaseActivity {
 
         //Navigation View
         NavigationView navigation = findViewById(R.id.navigation);
+        navigation.setNavigationItemSelectedListener(this);
 
 
         /**
@@ -63,6 +67,16 @@ public class HomeActivity extends BaseActivity {
         bodyWelcome.setText(welcomeBodyFormatted);
 
         /**
+         * When this page is loaded without clicking on titleButton, load SharedPreferences into TextViews
+         */
+        if (nameReceived == null) {
+            setTextView("Name", nameWelcome);
+        }
+        if (bodyReceived == null) {
+            setTextView("Body", bodyWelcome);
+        }
+
+        /**
          * Button delcarations
          */
         Button dateButton = findViewById(R.id.dateButton);
@@ -77,7 +91,26 @@ public class HomeActivity extends BaseActivity {
             Intent favouritesPage = new Intent(this, FavouritesActivity.class);
             startActivity(favouritesPage);
         });
+    }
 
+    /**
+     * Grab preference from SharedPreferences if it exists
+     */
+    private void setTextView(String preference, TextView textView) {
+
+        SharedPreferences preferences = getSharedPreferences(preference, Context.MODE_PRIVATE);
+        String savedString = preferences.getString(preference, "Preference not found");
+        if (!(savedString.contains("Preference not found"))) {
+            if (preference.equals("Name")) {
+                String string = String.format(getString(R.string.welcome), savedString);
+                textView.setText(string);
+            } else if (preference.equals("Body")) {
+                String string = String.format(getString(R.string.bodyWelcome), savedString);
+                textView.setText(string);
+            }
+        } else {
+            textView.setText("");
+        }
     }
 
     /**

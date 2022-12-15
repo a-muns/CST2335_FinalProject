@@ -35,6 +35,7 @@ public class FavouritesActivity extends BaseActivity {
 
         //Navigation View
         NavigationView navigation = findViewById(R.id.navigation);
+        navigation.setNavigationItemSelectedListener(this);
     }
 
     /**

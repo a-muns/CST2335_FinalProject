@@ -1,14 +1,17 @@
 package com.example.cst2335_finalproject;
 
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
@@ -37,6 +40,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return true;
 
+        // Snackbar and Toast templates ~~~
         //        DrawerLayout drawer = findViewById(R.id.drawer);
 //        Snackbar.make(drawer, "Welcome! Fill in the text fields, then click Go!", Snackbar.LENGTH_INDEFINITE)
 //                .setAction("Dismiss", new View.OnClickListener() {
@@ -59,7 +63,37 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        String message = null;
+        String toolbarTitle = (String)getSupportActionBar().getTitle();
+
+        switch(item.getItemId()) {
+            case R.id.navMain:
+            if (!toolbarTitle.contains("Main")) {
+                Intent mainPage = new Intent(this, MainActivity.class);
+                startActivity(mainPage);
+            }
+                break;
+            case R.id.navHome:
+                if (!toolbarTitle.contains("Home")) {
+                    Intent homePage = new Intent(this, HomeActivity.class);
+                    startActivity(homePage);
+                }
+                break;
+            case R.id.navSearch:
+                if (!toolbarTitle.contains("Search")) {
+                    Intent searchPage = new Intent(this, SearchActivity.class);
+                    startActivity(searchPage);
+                }
+                break;
+            case R.id.navFavourites:
+                if (!toolbarTitle.contains("Favourites")) {
+                    Intent favouritesPage = new Intent(this, FavouritesActivity.class);
+                    startActivity(favouritesPage);
+                }
+                break;
+        }
+
+        DrawerLayout drawer = findViewById(R.id.drawer);
+        drawer.closeDrawer(GravityCompat.START);
 
         return false;
     }

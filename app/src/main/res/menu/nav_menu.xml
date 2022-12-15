@@ -3,13 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:title="nav_item1"
-        android:orderInCategory="10"
+        android:id="@+id/navMain"
+        android:title="Main"
         app:showAsAction="always" />
 
     <item
-        android:title="nav_item2"
-        android:orderInCategory="20"
+        android:id="@+id/navHome"
+        android:title="Home"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/navSearch"
+        android:title="Search"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/navFavourites"
+        android:title="Favourites"
         app:showAsAction="always" />
 
 </menu>

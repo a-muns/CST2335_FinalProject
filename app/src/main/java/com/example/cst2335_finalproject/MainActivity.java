@@ -47,6 +47,7 @@ public class MainActivity extends BaseActivity {
 
         //Navigation View
         NavigationView navigation = findViewById(R.id.navigation);
+        navigation.setNavigationItemSelectedListener(this);
 
 
         // Sets edit values to saved SharedPreferences values if they exist

@@ -41,15 +41,15 @@
             app:layout_constraintTop_toBottomOf="@id/bodyWelcome"
             android:text="Search Dates" />
 
-            <Button
-                android:id="@+id/favouritesButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/bodyWelcome"
-                app:layout_constraintLeft_toRightOf="@id/dateButton"
-                android:text="My Favourites" />
+        <Button
+            android:id="@+id/favouritesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/bodyWelcome"
+            app:layout_constraintLeft_toRightOf="@id/dateButton"
+            android:text="My Favourites" />
 
-    b</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation"
