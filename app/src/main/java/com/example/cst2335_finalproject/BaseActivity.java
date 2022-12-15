@@ -36,6 +36,19 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return true;
+
+        //        DrawerLayout drawer = findViewById(R.id.drawer);
+//        Snackbar.make(drawer, "Welcome! Fill in the text fields, then click Go!", Snackbar.LENGTH_INDEFINITE)
+//                .setAction("Dismiss", new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        // Do nothing, dismissing the snackbar
+//                    }
+//                })
+//                .show();
+
+        // Make Toast (change to Snackbar displaying help info?)
+        // Toast.makeText(this, "Help clicked", Toast.LENGTH_SHORT).show();
     }
 
     /**

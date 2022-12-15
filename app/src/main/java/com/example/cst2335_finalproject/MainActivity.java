@@ -2,6 +2,7 @@ package com.example.cst2335_finalproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -105,26 +106,18 @@ public class MainActivity extends BaseActivity {
     }
 
     /**
-     * On clicking help button
+     * Alert Dialog on clicking help button
      * @param item
      * @return
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        DrawerLayout drawer = findViewById(R.id.drawer);
-
-        Snackbar.make(drawer, "Welcome! Fill in the text fields, then click Go!", Snackbar.LENGTH_INDEFINITE)
-                .setAction("Dismiss", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // Do nothing, dismissing the snackbar
-                    }
-                })
-                .show();
-
-        // Make Toast (change to Snackbar displaying help info?)
-        // Toast.makeText(this, "Help clicked", Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Main Help")
+                .setMessage("Welcome to the NASA Image of the Day Search. Fill in the text fields, then click Go!")
+                .setPositiveButton("Dismiss", (click, arg) -> { });
+        alertDialogBuilder.create().show();
 
         return true;
     }

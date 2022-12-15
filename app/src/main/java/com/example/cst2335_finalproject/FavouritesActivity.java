@@ -2,6 +2,7 @@ package com.example.cst2335_finalproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -37,26 +38,19 @@ public class FavouritesActivity extends BaseActivity {
     }
 
     /**
-     * On clicking help button
+     * Alert Dialog on clicking help button
      * @param item
      * @return
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        DrawerLayout drawer = findViewById(R.id.drawer);
-
-        Snackbar.make(drawer, "Browse your favourite dates. Click a date to open its details.", Snackbar.LENGTH_INDEFINITE)
-                .setAction("Dismiss", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // Do nothing, dismissing the snackbar
-                    }
-                })
-                .show();
-
-        // Make Toast (change to Snackbar displaying help info?)
-        // Toast.makeText(this, "Help clicked", Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Favourites Help")
+                .setMessage("This page contains a list of your saved dates. " +
+                        "Click a date to see its details or delete it from your favourites.")
+                .setPositiveButton("Dismiss", (click, arg) -> { });
+        alertDialogBuilder.create().show();
 
         return true;
     }

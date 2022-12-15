@@ -2,6 +2,7 @@ package com.example.cst2335_finalproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -80,26 +81,18 @@ public class HomeActivity extends BaseActivity {
     }
 
     /**
-     * On clicking help button
+     * Alert Dialog on clicking help button
      * @param item
      * @return
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        DrawerLayout drawer = findViewById(R.id.drawer);
-
-        Snackbar.make(drawer, "Click Search to search images, or Favourites to see saved dates.", Snackbar.LENGTH_INDEFINITE)
-                .setAction("Dismiss", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // Do nothing, dismissing the snackbar
-                    }
-                })
-                .show();
-
-        // Make Toast (change to Snackbar displaying help info?)
-        // Toast.makeText(this, "Help clicked", Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Home Help")
+                .setMessage("This is your home page. Click Search to search images, or Favourites to view your saved dates.")
+                .setPositiveButton("Dismiss", (click, arg) -> { });
+        alertDialogBuilder.create().show();
 
         return true;
     }

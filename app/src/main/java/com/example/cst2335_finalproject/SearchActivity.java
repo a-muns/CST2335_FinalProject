@@ -2,6 +2,7 @@ package com.example.cst2335_finalproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -37,26 +38,19 @@ public class SearchActivity extends BaseActivity {
     }
 
     /**
-     * On clicking help button
+     * Alert Dialog on clicking help button
      * @param item
      * @return
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        DrawerLayout drawer = findViewById(R.id.drawer);
-
-        Snackbar.make(drawer, "Click a date in the calendar to search images.", Snackbar.LENGTH_INDEFINITE)
-                .setAction("Dismiss", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // Do nothing, dismissing the snackbar
-                    }
-                })
-                .show();
-
-        // Make Toast (change to Snackbar displaying help info?)
-        // Toast.makeText(this, "Help clicked", Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Search Help")
+                .setMessage("Select a date in the calendar to search for the image associated with that date." +
+                        " You can save a date by clicking the star icon.")
+                .setPositiveButton("Dismiss", (click, arg) -> { });
+        alertDialogBuilder.create().show();
 
         return true;
     }
