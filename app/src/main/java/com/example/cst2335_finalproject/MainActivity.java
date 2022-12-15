@@ -1,16 +1,25 @@
 package com.example.cst2335_finalproject;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+
+public class MainActivity extends BaseActivity {
 
     /**
      * Global SharedPreferences
@@ -22,6 +31,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Set toolbar and title
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Main    (1.0.0)");
+
+        // Drawer
+        DrawerLayout drawer = findViewById(R.id.drawer);
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.open, R.string.close);
+        drawer.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
+        //Navigation View
+        NavigationView navigation = findViewById(R.id.navigation);
+
 
         // Sets edit values to saved SharedPreferences values if they exist
         setEditTexts();
@@ -77,5 +102,30 @@ public class MainActivity extends AppCompatActivity {
         bodyEditor.putString("Body", bodyString);
         nameEditor.commit();
         bodyEditor.commit();
+    }
+
+    /**
+     * On clicking help button
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        DrawerLayout drawer = findViewById(R.id.drawer);
+
+        Snackbar.make(drawer, "Welcome! Fill in the text fields, then click Go!", Snackbar.LENGTH_INDEFINITE)
+                .setAction("Dismiss", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Do nothing, dismissing the snackbar
+                    }
+                })
+                .show();
+
+        // Make Toast (change to Snackbar displaying help info?)
+        // Toast.makeText(this, "Help clicked", Toast.LENGTH_SHORT).show();
+
+        return true;
     }
 }
