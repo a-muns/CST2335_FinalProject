@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="center"
-        android:src="@drawable/titleBackground" />
+        android:src="@drawable/title_background" />
 
     <TextView
         android:id="@+id/titleText"
@@ -71,6 +71,7 @@
         android:background="@drawable/rounded_border"/>
 
     <Button
+        android:id="@+id/titleButton"
         android:layout_width="200dp"
         android:layout_height="70dp"
         android:layout_marginTop="50dp"
