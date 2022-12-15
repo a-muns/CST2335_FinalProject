@@ -20,9 +20,29 @@
             android:theme="@style/ToolbarStyle"/>
 
         <TextView
+            android:id="@+id/nasaItemTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
             android:text="Date Search" />
+        <TextView
+            android:id="@+id/nasaItemExplanation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/nasaItemTitle"
+            android:text="Explanation" />
+        <TextView
+            android:id="@+id/nasaItemImageURL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/nasaItemExplanation"
+            android:text="Image URL" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/nasaItemImageURL"
+            android:text="Save to Favourites" />
 
         <DatePicker
             android:layout_width="match_parent"
