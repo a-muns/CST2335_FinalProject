@@ -68,7 +68,7 @@ public class ResultActivity extends BaseActivity {
          */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Search    (1.0.0)");
+        getSupportActionBar().setTitle(R.string.resultToolbar);
 
         // Drawer
         DrawerLayout drawer = findViewById(R.id.drawer);
@@ -113,12 +113,9 @@ public class ResultActivity extends BaseActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Results Help")
-                .setMessage("This page displays the result of your chosen date. " +
-                        "Click on 'Open Image in Broswer' to load the HD image into your default broswer." +
-                        "Click 'Save' to save this image to your Favourites." +
-                        "If you receive an error message, this item may already be in your Favourites.")
-                .setPositiveButton("Dismiss", (click, arg) -> { });
+        alertDialogBuilder.setTitle(R.string.help)
+                .setMessage(R.string.resultHelp)
+                .setPositiveButton(R.string.dismiss, (click, arg) -> { });
         alertDialogBuilder.create().show();
 
         return true;

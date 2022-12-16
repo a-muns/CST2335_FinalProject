@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -44,7 +45,7 @@ public class FavouritesActivity extends BaseActivity {
          */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Favourites    (1.0.0)");
+        getSupportActionBar().setTitle(R.string.favouritesToolbar);
 
         // Drawer
         DrawerLayout drawer = findViewById(R.id.drawer);
@@ -82,6 +83,12 @@ public class FavouritesActivity extends BaseActivity {
             newActivity.putExtras(itemData);
             startActivity(newActivity);
         });
+
+        // Refresh adapter on refreshButton click
+        Button refreshButton = findViewById(R.id.refreshButton);
+        refreshButton.setOnClickListener( click -> {
+            adapter.notifyDataSetChanged();
+        });
     }
 
     public void loadDBData() {
@@ -114,15 +121,6 @@ public class FavouritesActivity extends BaseActivity {
                 e.printStackTrace();
             }
         }
-    }
-
-    /**
-     * Delete item from database
-     * @param position
-     */
-    public void deleteDBItem(int position) {
-        NASAItem deleteItem = itemArray.get(position);
-        db.delete(DBOpener.TABLE_NAME, DBOpener.COL_ID + " = ?", new String[] {Long.toString(deleteItem.getId())});
     }
 
     /**
@@ -168,10 +166,9 @@ public class FavouritesActivity extends BaseActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Favourites Help")
-                .setMessage("This page contains a list of your saved dates. " +
-                        "Click a date to see its details or delete it from your favourites.")
-                .setPositiveButton("Dismiss", (click, arg) -> { });
+        alertDialogBuilder.setTitle(R.string.help)
+                .setMessage(R.string.favouritesHelp)
+                .setPositiveButton(R.string.dismiss, (click, arg) -> { });
         alertDialogBuilder.create().show();
 
         return true;

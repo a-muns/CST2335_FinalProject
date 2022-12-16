@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/helpItem"
-        android:title="Help"
+        android:title="@string/help"
         android:orderInCategory="10"
         android:icon="@drawable/help"
         app:showAsAction="always" />

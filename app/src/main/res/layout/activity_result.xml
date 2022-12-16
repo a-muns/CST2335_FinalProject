@@ -9,7 +9,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:background="@color/black">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -32,7 +33,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="20dp"
-                android:text="Open Image in Browser" />
+                android:text="@string/openInBrowser" />
 
             <Button
                 android:id="@+id/saveFavouriteButton"
@@ -42,7 +43,7 @@
                 app:layout_constraintLeft_toRightOf="@id/imageRedirectButton"
                 app:layout_constraintTop_toBottomOf="@id/toolbar"
                 android:layout_marginTop="20dp"
-                android:text="Save" />
+                android:text="@string/save" />
 
             <TextView
                 android:id="@+id/itemDateHeader"
@@ -50,7 +51,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/imageRedirectButton"
                 android:layout_marginTop="20dp"
-                android:text="Date"
+                android:text="@string/date"
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
 
@@ -68,7 +69,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/nasaItemDate"
                 android:layout_marginTop="10dp"
-                android:text="Title"
+                android:text="@string/title"
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
 
@@ -86,7 +87,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/nasaItemTitle"
                 android:layout_marginTop="10dp"
-                android:text="Explanation"
+                android:text="@string/explanation"
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
 
@@ -104,7 +105,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/nasaItemExplanation"
                 android:layout_marginTop="10dp"
-                android:text="HD Image URL"
+                android:text="@string/imageURL"
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
 

@@ -32,7 +32,7 @@ public class SearchActivity extends BaseActivity implements DatePickerDialog.OnD
          */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Search    (1.0.0)");
+        getSupportActionBar().setTitle(R.string.searchToolbar);
 
         // Drawer
         DrawerLayout drawer = findViewById(R.id.drawer);
@@ -85,10 +85,9 @@ public class SearchActivity extends BaseActivity implements DatePickerDialog.OnD
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Search Help")
-                .setMessage("Select a date in the calendar to search for the image associated with that date." +
-                        " You can save a date by clicking the star icon.")
-                .setPositiveButton("Dismiss", (click, arg) -> { });
+        alertDialogBuilder.setTitle(R.string.help)
+                .setMessage(R.string.searchHelp)
+                .setPositiveButton(R.string.dismiss, (click, arg) -> { });
         alertDialogBuilder.create().show();
 
         return true;

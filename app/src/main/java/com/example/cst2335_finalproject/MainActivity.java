@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity {
          */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Main    (1.0.0)");
+        getSupportActionBar().setTitle(R.string.mainToolbar);
 
         // Drawer
         DrawerLayout drawer = findViewById(R.id.drawer);
@@ -117,9 +117,9 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Main Help")
-                .setMessage("Welcome to the NASA Image of the Day Search. Fill in the text fields, then click Go!")
-                .setPositiveButton("Dismiss", (click, arg) -> { });
+        alertDialogBuilder.setTitle(R.string.help)
+                .setMessage(R.string.mainHelp)
+                .setPositiveButton(R.string.dismiss, (click, arg) -> { });
         alertDialogBuilder.create().show();
 
         return true;

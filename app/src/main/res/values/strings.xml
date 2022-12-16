@@ -1,9 +1,54 @@
 <resources>
     <string name="app_name">CST2335_FinalProject</string>
-    <string name="welcome">Welcome %1$s</string>
-    <string name="bodyWelcome">Your favourite celestial body is: %1$s</string>
+
+    <!-- Organized by use in Activity -->
+    <!-- General -->
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="help">Help</string>
+    <string name="dismiss">Dismiss</string>
+    <!-- MainActivity -->
+    <string name="main">Main</string>
+        <string name="mainToolbar">Main        v1.0.0</string>
+        <string name="mainTitle">Image of the Day Search</string>
+        <string name="enterName">Enter your name:</string>
+        <string name="enterBody">What is your favourite celestial body?</string>
+        <string name="typeHere">Type here</string>
+        <string name="go">Go!</string>
+        <string name="mainHelp">Welcome to the NASA Image of the Day Search. Fill in the
+            text fields, then click Go!</string>
+    <!-- HomeActivity -->
+    <string name="home">Home</string>
+        <string name="homeToolbar">Home        v1.0.0</string>
+        <string name="welcome">Welcome %1$s</string>
+        <string name="bodyWelcome">Your favourite celestial body is: %1$s</string>
+        <string name="searchDates">Search Dates</string>
+        <string name="myFavourites">My Favourites</string>
+        <string name="homeHelp">This is your home page. Click on \'Search Dates\' to search images,
+            or \'My Favourites\' to view your saved images.</string>
+    <!-- SearchActivity -->
+    <string name="search">Search</string>
+        <string name="searchToolbar">Search        v1.0.0</string>
+        <string name="openCal">Open Calendar</string>
+        <string name="searchHelp">Click on \'Open Calendar\', then select a date in the
+            calendar to search for the image associated with that date.</string>
+    <!-- ResultActivity -->
+    <string name="result">Result</string>
+        <string name="resultToolbar">Result        v1.0.0</string>
+        <string name="openInBrowser">Open image in browser</string>
+        <string name="save">Save</string>
+        <string name="date">Date</string>
+        <string name="title">Title</string>
+        <string name="explanation">Explanation</string>
+        <string name="imageURL">HD Image URL</string>
+        <string name="resultHelp">This page displays the result of your chosen date.
+            Click on \'Open Image in Browser\' to load the HD image into your default browser.
+            Click \'Save\' to save this image to your Favourites.</string>
+    <!-- FavouritesActivity -->
+    <string name="favourites">Favourites</string>
+        <string name="favouritesToolbar">Favourites        v1.0.0</string>
+        <string name="refresh">Refresh</string>
+        <string name="favouritesHelp">This page contains a list of your saved images. Click a date
+            to see its details or delete it from your favourites.</string>
+        <string name="remove">Remove</string>
 </resources>

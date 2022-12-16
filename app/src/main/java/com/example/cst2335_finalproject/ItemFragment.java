@@ -1,5 +1,8 @@
 package com.example.cst2335_finalproject;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,12 +10,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class ItemFragment extends Fragment {
+
+    SQLiteDatabase db;
 
     /**
      * Receive itemData and inflate fragment
@@ -25,17 +31,20 @@ public class ItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        // Open database
+        DBOpener dbOpener = new DBOpener(getActivity());
+        db = dbOpener.getWritableDatabase();
+
         // Inflate the layout for this fragment
         View result = inflater.inflate(R.layout.fragment_item, container, false);
 
         // Get bundled data
         Bundle itemData = getArguments();
-        try {
-            long id = itemData.getLong(DBOpener.COL_ID);
-            String date = itemData.getString(DBOpener.COL_DATE);
-            String title = itemData.getString(DBOpener.COL_TITLE);
-            String explanation = itemData.getString(DBOpener.COL_EXPLANATION);
-            URL imageURL = new URL(itemData.getString(DBOpener.COL_IMAGE_URL));
+        long id = itemData.getLong(DBOpener.COL_ID);
+        String date = itemData.getString(DBOpener.COL_DATE);
+        String title = itemData.getString(DBOpener.COL_TITLE);
+        String explanation = itemData.getString(DBOpener.COL_EXPLANATION);
+        String imageURL = itemData.getString(DBOpener.COL_IMAGE_URL);
 
         // Set TextViews with data
         TextView nasaItemDate = result.findViewById(R.id.nasaItemDate_fav);
@@ -46,9 +55,23 @@ public class ItemFragment extends Fragment {
         nasaItemTitle.setText(title);
         nasaItemExplanation.setText(explanation);
         nasaItemImageURL.setText(imageURL.toString());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+
+        // Image redirect button
+        Button imageRedirectButton = result.findViewById(R.id.imageRedirectButton_fav);
+        imageRedirectButton.setOnClickListener( click -> {
+            try {
+                Intent browserRedirect = new Intent(Intent.ACTION_VIEW, Uri.parse(imageURL));
+                startActivity(browserRedirect);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        // On click of removeFavouriteButton, remove this item from the database
+        Button removeButton = result.findViewById(R.id.removeFavouriteButton);
+        removeButton.setOnClickListener( click -> {
+            db.delete(DBOpener.TABLE_NAME, DBOpener.COL_ID + " = ?", new String[] {Long.toString(id)});
+        });
 
         return result;
     }

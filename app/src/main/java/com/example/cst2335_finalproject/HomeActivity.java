@@ -23,7 +23,6 @@ import com.google.android.material.snackbar.Snackbar;
 import org.w3c.dom.Text;
 
 public class HomeActivity extends BaseActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +33,7 @@ public class HomeActivity extends BaseActivity {
          */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Home    (1.0.0)");
+        getSupportActionBar().setTitle(R.string.homeToolbar);
 
         // Drawer
         DrawerLayout drawer = findViewById(R.id.drawer);
@@ -124,9 +123,9 @@ public class HomeActivity extends BaseActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Home Help")
-                .setMessage("This is your home page. Click Search to search images, or Favourites to view your saved dates.")
-                .setPositiveButton("Dismiss", (click, arg) -> { });
+        alertDialogBuilder.setTitle(R.string.help)
+                .setMessage(R.string.homeHelp)
+                .setPositiveButton(R.string.dismiss, (click, arg) -> { });
         alertDialogBuilder.create().show();
 
         return true;
