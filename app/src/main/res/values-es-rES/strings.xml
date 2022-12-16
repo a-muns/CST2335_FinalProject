@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CST2335_FinalProject</string>
+
+    <!-- Organized by use in Activity -->
+    <!-- General -->
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="help">Ayudame</string>
+    <string name="dismiss">Descartar</string>
+    <!-- MainActivity -->
+    <string name="main">Principal</string>
+    <string name="mainToolbar">Principal v1.0.0</string>
+    <string name="mainTitle">Busqueda de la Imagen del Dia</string>
+    <string name="enterName">Introduzca tu nombre:</string>
+    <string name="enterBody">Cual es tu cuerpo celstial favorito?</string>
+    <string name="typeHere">Escriba aqui</string>
+    <string name="go">Ir!</string>
+    <string name="mainHelp">Bienvenido a Busqueda de la Imagen del Dia NASA. Complete los campos de
+        text, luego haga clic en \'Ir!\'</string>
+    <!-- HomeActivity -->
+    <string name="home">Pagina de Inicio</string>
+    <string name="homeToolbar">Pagina de Inicio v1.0.0</string>
+    <string name="welcome">Bienvendio %1$s</string>
+    <string name="bodyWelcome">Tu cuerpo celestial favorito es: %1$s</string>
+    <string name="searchDates">Buscar Fechas</string>
+    <string name="myFavourites">Mis Favoritos</string>
+    <string name="homeHelp">Esta es tu pagina de inicio. Haga clic en \'Buscar Fechas\' para buscar
+        imagenes, o \'Mis Favoritos\' para ver sus imagenes guardadas.</string>
+    <!-- SearchActivity -->
+    <string name="search">Buscar</string>
+    <string name="searchToolbar">Buscar v1.0.0</string>
+    <string name="openCal">Abre Calendario</string>
+    <string name="searchHelp">Haga clic en \'Abre Calendario\', luego seleccione una fecha en el
+        calandario para buscar la imagen asociada con esa fecha.</string>
+    <!-- ResultActivity -->
+    <string name="result">Resultado</string>
+    <string name="resultToolbar">Resultado v1.0.0</string>
+    <string name="openInBrowser">Abre Imagen en el Navegador</string>
+    <string name="save">Ahorrar</string>
+    <string name="date">Fecha</string>
+    <string name="title">Titulo</string>
+    <string name="explanation">Explicacion</string>
+    <string name="imageURL">URL de la Imagen HD</string>
+    <string name="resultHelp">Esta pagina muestra el resultado de la fecha elegida.
+        Haga clic en \'Abre Imagen en el Navegador\' para cargar el imagen HD en su navegador
+        predeterminado.
+        Haga clic en \'Ahorrar\' para ahorrar esta imagen en sus favoritos.</string>
+    <!-- FavouritesActivity -->
+    <string name="favourites">Favoritos</string>
+    <string name="favouritesToolbar">Favoritos v1.0.0</string>
+    <string name="refresh">Actualizar</string>
+    <string name="favouritesHelp">Esta pagina contiene una lista de sus imagenes ahorradas. Haga
+        clic en una fecha para ver sus detalles o eliminarla de tus favoritos.</string>
+    <string name="remove">Eliminar</string>
+</resources>

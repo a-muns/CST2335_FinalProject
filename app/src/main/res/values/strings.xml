@@ -9,17 +9,17 @@
     <string name="dismiss">Dismiss</string>
     <!-- MainActivity -->
     <string name="main">Main</string>
-        <string name="mainToolbar">Main        v1.0.0</string>
+        <string name="mainToolbar">Main v1.0.0</string>
         <string name="mainTitle">Image of the Day Search</string>
         <string name="enterName">Enter your name:</string>
         <string name="enterBody">What is your favourite celestial body?</string>
         <string name="typeHere">Type here</string>
         <string name="go">Go!</string>
         <string name="mainHelp">Welcome to the NASA Image of the Day Search. Fill in the
-            text fields, then click Go!</string>
+            text fields, then click \'Go!\'</string>
     <!-- HomeActivity -->
     <string name="home">Home</string>
-        <string name="homeToolbar">Home        v1.0.0</string>
+        <string name="homeToolbar">Home v1.0.0</string>
         <string name="welcome">Welcome %1$s</string>
         <string name="bodyWelcome">Your favourite celestial body is: %1$s</string>
         <string name="searchDates">Search Dates</string>
@@ -28,13 +28,13 @@
             or \'My Favourites\' to view your saved images.</string>
     <!-- SearchActivity -->
     <string name="search">Search</string>
-        <string name="searchToolbar">Search        v1.0.0</string>
+        <string name="searchToolbar">Search v1.0.0</string>
         <string name="openCal">Open Calendar</string>
         <string name="searchHelp">Click on \'Open Calendar\', then select a date in the
             calendar to search for the image associated with that date.</string>
     <!-- ResultActivity -->
     <string name="result">Result</string>
-        <string name="resultToolbar">Result        v1.0.0</string>
+        <string name="resultToolbar">Result  v1.0.0</string>
         <string name="openInBrowser">Open image in browser</string>
         <string name="save">Save</string>
         <string name="date">Date</string>
@@ -46,7 +46,7 @@
             Click \'Save\' to save this image to your Favourites.</string>
     <!-- FavouritesActivity -->
     <string name="favourites">Favourites</string>
-        <string name="favouritesToolbar">Favourites        v1.0.0</string>
+        <string name="favouritesToolbar">Favourites v1.0.0</string>
         <string name="refresh">Refresh</string>
         <string name="favouritesHelp">This page contains a list of your saved images. Click a date
             to see its details or delete it from your favourites.</string>
