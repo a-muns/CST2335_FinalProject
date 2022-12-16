@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ItemFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black">
+
+            <Button
+                android:id="@+id/imageRedirectButton_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="Open Image in Browser" />
+
+            <Button
+                android:id="@+id/saveFavouriteButton_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/imageRedirectButton_fav"
+                android:layout_marginTop="20dp"
+                android:text="Save" />
+
+            <TextView
+                android:id="@+id/itemDateHeader_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/imageRedirectButton_fav"
+                android:layout_marginTop="20dp"
+                android:text="Date"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/nasaItemDate_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/itemDateHeader_fav"
+                android:text=""
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/itemTitleHeader_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/nasaItemDate_fav"
+                android:layout_marginTop="10dp"
+                android:text="Title"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/nasaItemTitle_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/itemTitleHeader_fav"
+                android:text=""
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/itemExplanationHeader_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/nasaItemTitle_fav"
+                android:layout_marginTop="10dp"
+                android:text="Explanation"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/nasaItemExplanation_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/itemExplanationHeader_fav"
+                android:text=""
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/itemImageUrlHeader_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/nasaItemExplanation_fav"
+                android:layout_marginTop="10dp"
+                android:text="HD Image URL"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/nasaItemImageURL_fav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/itemImageUrlHeader_fav"
+                android:text=""
+                android:textColor="@color/white"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</FrameLayout>

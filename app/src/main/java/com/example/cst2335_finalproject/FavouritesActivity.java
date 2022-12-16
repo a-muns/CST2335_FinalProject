@@ -7,11 +7,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
@@ -26,7 +29,9 @@ public class FavouritesActivity extends BaseActivity {
     /**
      * Globals
      */
-    private ArrayList<NASAItem> dateArray = new ArrayList<>();
+    private ArrayList<NASAItem> itemArray = new ArrayList<>();
+    private ArrayList<String> titleArray = new ArrayList<>();
+    private ArrayAdapter<String> adapter;
     SQLiteDatabase db;
 
     @Override
@@ -51,6 +56,32 @@ public class FavouritesActivity extends BaseActivity {
         //Navigation View
         NavigationView navigation = findViewById(R.id.navigation);
         navigation.setNavigationItemSelectedListener(this);
+
+        loadDBData();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DBOpener.TABLE_NAME + ";", null);
+        printCursor(cursor);
+
+        /**
+         * Set adapter on ListView
+         */
+        ListView favouritesListView = findViewById(R.id.favouritesListView);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, titleArray);
+        favouritesListView.setAdapter(adapter);
+
+        // On item click, send item details to EmptyActivity
+        favouritesListView.setOnItemClickListener((list, item, position, id) -> {
+            Bundle itemData = new Bundle();
+            NASAItem nasaItem = itemArray.get(position);
+            itemData.putLong(DBOpener.COL_ID, nasaItem.getId());
+            itemData.putString(DBOpener.COL_DATE, nasaItem.getDate());
+            itemData.putString(DBOpener.COL_TITLE, nasaItem.getTitle());
+            itemData.putString(DBOpener.COL_EXPLANATION, nasaItem.getExplanation());
+            itemData.putString(DBOpener.COL_IMAGE_URL, nasaItem.getImageURL().toString());
+
+            Intent newActivity = new Intent(this, EmptyActivity.class);
+            newActivity.putExtras(itemData);
+            startActivity(newActivity);
+        });
     }
 
     public void loadDBData() {
@@ -77,7 +108,8 @@ public class FavouritesActivity extends BaseActivity {
                 String explanation = results.getString(explanationColIndex);
                 URL imageURL = new URL(results.getString(imageURLColIndex));
 
-                dateArray.add(new NASAItem(id, date, title, explanation, imageURL));
+                itemArray.add(new NASAItem(id, date, title, explanation, imageURL));
+                titleArray.add(date + " | " + title);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -89,7 +121,7 @@ public class FavouritesActivity extends BaseActivity {
      * @param position
      */
     public void deleteDBItem(int position) {
-        NASAItem deleteItem = dateArray.get(position);
+        NASAItem deleteItem = itemArray.get(position);
         db.delete(DBOpener.TABLE_NAME, DBOpener.COL_ID + " = ?", new String[] {Long.toString(deleteItem.getId())});
     }
 
@@ -120,14 +152,11 @@ public class FavouritesActivity extends BaseActivity {
     }
 
     /**
-     * Load DB and print contents to console on resume
+     * Notify adapter of dataset change on resume
      */
     public void onResume() {
         super.onResume();
-
-        loadDBData();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + DBOpener.TABLE_NAME + ";", null);
-        printCursor(cursor);
+        adapter.notifyDataSetChanged();
     }
 
     /**
