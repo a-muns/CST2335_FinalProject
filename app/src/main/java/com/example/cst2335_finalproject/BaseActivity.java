@@ -51,8 +51,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 //                })
 //                .show();
 
-        // Make Toast (change to Snackbar displaying help info?)
-        // Toast.makeText(this, "Help clicked", Toast.LENGTH_SHORT).show();
+
     }
 
     /**

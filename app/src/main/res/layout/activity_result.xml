@@ -7,75 +7,120 @@
     android:layout_height="match_parent"
     tools:context=".ResultActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/black"
-            android:theme="@style/ToolbarStyle"/>
+            android:layout_height="match_parent"
+            android:background="@color/black">
 
-        <Button
-            android:id="@+id/imageRedirectButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:text="Open Image in Browser" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/black"
+                android:theme="@style/ToolbarStyle"/>
 
-        <TextView
-            android:id="@+id/itemTitleHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/imageRedirectButton"
-            android:text="Title"
-            android:textStyle="bold"/>
+            <Button
+                android:id="@+id/imageRedirectButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="Open Image in Browser" />
 
-        <TextView
-            android:id="@+id/nasaItemTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/itemTitleHeader"
-            android:text=""/>
+            <Button
+                android:id="@+id/saveFavouriteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/imageRedirectButton"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                android:layout_marginTop="20dp"
+                android:text="Save" />
 
-        <TextView
-            android:id="@+id/itemExplanationHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/nasaItemTitle"
-            android:text="Explanation"
-            android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/itemDateHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/imageRedirectButton"
+                android:layout_marginTop="20dp"
+                android:text="Date"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/nasaItemExplanation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/itemExplanationHeader"
-            android:text="" />
+            <TextView
+                android:id="@+id/nasaItemDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/itemDateHeader"
+                android:text=""
+                android:textColor="@color/white"/>
 
-        <TextView
-            android:id="@+id/itemImageUrlHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/nasaItemExplanation"
-            android:text="HD Image URL"
-            android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/itemTitleHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/nasaItemDate"
+                android:layout_marginTop="10dp"
+                android:text="Title"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/nasaItemImageURL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/itemImageUrlHeader"
-            android:text="" />
+            <TextView
+                android:id="@+id/nasaItemTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/itemTitleHeader"
+                android:text=""
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/itemExplanationHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/nasaItemTitle"
+                android:layout_marginTop="10dp"
+                android:text="Explanation"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/nasaItemExplanation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/itemExplanationHeader"
+                android:text=""
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/itemImageUrlHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/nasaItemExplanation"
+                android:layout_marginTop="10dp"
+                android:text="HD Image URL"
+                android:textColor="@color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/nasaItemImageURL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/itemImageUrlHeader"
+                android:text=""
+                android:textColor="@color/white"/>
 
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation"

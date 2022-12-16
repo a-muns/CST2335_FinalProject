@@ -27,7 +27,9 @@ public class SearchActivity extends BaseActivity implements DatePickerDialog.OnD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        // Set toolbar
+        /**
+         * Set toolbar and NavigationDrawer
+         */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Search    (1.0.0)");

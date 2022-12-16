@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,14 +16,27 @@ import android.view.View;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class FavouritesActivity extends BaseActivity {
+
+    /**
+     * Globals
+     */
+    private ArrayList<NASAItem> dateArray = new ArrayList<>();
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourites);
 
-        // Set toolbar
+        /**
+         * Set toolbar and NavigationDrawer
+         */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Favourites    (1.0.0)");
@@ -36,6 +51,83 @@ public class FavouritesActivity extends BaseActivity {
         //Navigation View
         NavigationView navigation = findViewById(R.id.navigation);
         navigation.setNavigationItemSelectedListener(this);
+    }
+
+    public void loadDBData() {
+        DBOpener dbOpener = new DBOpener(this);
+        db = dbOpener.getWritableDatabase();
+        String[] columns = {DBOpener.COL_ID, DBOpener.COL_DATE, DBOpener.COL_TITLE, DBOpener.COL_EXPLANATION, DBOpener.COL_IMAGE_URL};
+
+        Cursor results = db.query(false, DBOpener.TABLE_NAME, columns,
+                null, null, null, null, null, null);
+
+        // Column indexes
+        int idColIndex = results.getColumnIndex(DBOpener.COL_ID);
+        int dateColIndex = results.getColumnIndex(DBOpener.COL_DATE);
+        int titleColIndex = results.getColumnIndex(DBOpener.COL_TITLE);
+        int explanationColIndex = results.getColumnIndex(DBOpener.COL_EXPLANATION);
+        int imageURLColIndex = results.getColumnIndex(DBOpener.COL_IMAGE_URL);
+
+        // Grab data from columns, add resulting NASAItem to dateArray
+        while (results.moveToNext()) {
+            try {
+                Long id = results.getLong(idColIndex);
+                String date = results.getString(dateColIndex);
+                String title = results.getString(titleColIndex);
+                String explanation = results.getString(explanationColIndex);
+                URL imageURL = new URL(results.getString(imageURLColIndex));
+
+                dateArray.add(new NASAItem(id, date, title, explanation, imageURL));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Delete item from database
+     * @param position
+     */
+    public void deleteDBItem(int position) {
+        NASAItem deleteItem = dateArray.get(position);
+        db.delete(DBOpener.TABLE_NAME, DBOpener.COL_ID + " = ?", new String[] {Long.toString(deleteItem.getId())});
+    }
+
+    /**
+     * Print console to database for bug-checking
+     * @param cursor
+     */
+    public void printCursor(Cursor cursor) {
+        String[] columns = cursor.getColumnNames();
+
+        int idColIndex = cursor.getColumnIndex(DBOpener.COL_ID);
+        int dateColIndex = cursor.getColumnIndex(DBOpener.COL_DATE);
+        int titleColIndex = cursor.getColumnIndex(DBOpener.COL_TITLE);
+        int explanationColIndex = cursor.getColumnIndex(DBOpener.COL_EXPLANATION);
+        int imageURLColIndex = cursor.getColumnIndex(DBOpener.COL_IMAGE_URL);
+
+        System.out.println("# of columns: " + columns.length);
+        System.out.println("Columns: " + Arrays.toString(columns));
+        System.out.println("# of rows: " + cursor.getCount());
+        while (cursor.moveToNext()) {
+            System.out.println("ID: " + cursor.getLong(idColIndex));
+            System.out.println("Date: " + cursor.getString(dateColIndex));
+            System.out.println("Title: " + cursor.getString(titleColIndex));
+            System.out.println("Explanation: " + cursor.getString(explanationColIndex));
+            System.out.println("ImageURL: " + cursor.getString(imageURLColIndex));
+            System.out.println();
+        }
+    }
+
+    /**
+     * Load DB and print contents to console on resume
+     */
+    public void onResume() {
+        super.onResume();
+
+        loadDBData();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DBOpener.TABLE_NAME + ";", null);
+        printCursor(cursor);
     }
 
     /**

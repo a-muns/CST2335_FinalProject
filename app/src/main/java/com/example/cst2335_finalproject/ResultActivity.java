@@ -5,9 +5,15 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteConstraintException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,10 +21,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -32,13 +40,32 @@ public class ResultActivity extends BaseActivity {
      * Global variables
      */
     NASAItem nasaItem;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        // Set toolbar
+        // Open database
+        DBOpener dbOpener = new DBOpener(this);
+        db = dbOpener.getWritableDatabase();
+
+        /**
+         * Initialize NasaAPI AsyncTask with date chosen
+         */
+        // Receive and transform date into URL
+        Intent dataReceived = getIntent();
+        String date = dataReceived.getStringExtra("date");
+        String apiURL = "https://api.nasa.gov/planetary/apod?api_key=DgPLcIlnmN0Cwrzcg3e9NraFaYLIDI68Ysc6Zh3d&date=" + date;
+
+        // Start AsyncTask with formatted URL
+        NasaAPI nasaAPI = new NasaAPI();
+        nasaAPI.execute(apiURL);
+
+        /**
+         * Set toolbar and NavigationDrawer
+         */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Search    (1.0.0)");
@@ -55,16 +82,26 @@ public class ResultActivity extends BaseActivity {
         navigation.setNavigationItemSelectedListener(this);
 
         /**
-         * Initialize NasaAPI AsyncTask with date chosen
+         * Save NASAItem to database on clicking Save button
          */
-        // Receive and transform date into URL
-        Intent dataReceived = getIntent();
-        String date = dataReceived.getStringExtra("date");
-        String apiURL = "https://api.nasa.gov/planetary/apod?api_key=DgPLcIlnmN0Cwrzcg3e9NraFaYLIDI68Ysc6Zh3d&date=" + date;
+        Button saveFavouriteButton = findViewById(R.id.saveFavouriteButton);
+        saveFavouriteButton.setOnClickListener( click -> {
+            ContentValues newRowValues = new ContentValues();
+            newRowValues.put(DBOpener.COL_DATE, nasaItem.getDate());
+            newRowValues.put(DBOpener.COL_TITLE, nasaItem.getTitle());
+            newRowValues.put(DBOpener.COL_EXPLANATION, nasaItem.getExplanation());
+            newRowValues.put(DBOpener.COL_IMAGE_URL, nasaItem.getImageURL().toString());
 
-        // Start AsyncTask with formatted URL
-        NasaAPI nasaAPI = new NasaAPI();
-        nasaAPI.execute(apiURL);
+            // Change button and make toast
+            saveFavouriteButton.setBackgroundColor(ContextCompat.getColor(this, R.color.nasa_red));
+            saveFavouriteButton.setText("Saved");
+            Toast.makeText(this, "Saved to Favourites", Toast.LENGTH_SHORT).show();
+            try {
+                db.insertOrThrow(DBOpener.TABLE_NAME, null, newRowValues);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     /**
@@ -77,7 +114,10 @@ public class ResultActivity extends BaseActivity {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Results Help")
-                .setMessage("This page displays the result of your chosen date. Click on 'Open Image in Broswer' to load the HD image into your default broswer.")
+                .setMessage("This page displays the result of your chosen date. " +
+                        "Click on 'Open Image in Broswer' to load the HD image into your default broswer." +
+                        "Click 'Save' to save this image to your Favourites." +
+                        "If you receive an error message, this item may already be in your Favourites.")
                 .setPositiveButton("Dismiss", (click, arg) -> { });
         alertDialogBuilder.create().show();
 
@@ -109,10 +149,11 @@ public class ResultActivity extends BaseActivity {
                 JSONObject nasaJSON = new JSONObject(result);
 
                 // Cast attributes into a new NASAItem object
+                String date = nasaJSON.getString("date");
                 String title = nasaJSON.getString("title");
                 String explanation = nasaJSON.getString("explanation");
                 URL imageURL = new URL(nasaJSON.getString("hdurl"));
-                nasaItem = new NASAItem(title, explanation, imageURL);
+                nasaItem = new NASAItem(date, title, explanation, imageURL);
                 Log.i("doInBackground", nasaItem.getTitle() + nasaItem.getExplanation() + nasaItem.getImageURL());
 
                 publishProgress(1);
@@ -130,9 +171,11 @@ public class ResultActivity extends BaseActivity {
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
+            TextView nasaItemDate = findViewById(R.id.nasaItemDate);
             TextView nasaItemTitle = findViewById(R.id.nasaItemTitle);
             TextView nasaItemExplanation = findViewById(R.id.nasaItemExplanation);
             TextView nasaItemImageURL = findViewById(R.id.nasaItemImageURL);
+            nasaItemDate.setText(nasaItem.getDate());
             nasaItemTitle.setText(nasaItem.getTitle());
             nasaItemExplanation.setText(nasaItem.getExplanation());
             nasaItemImageURL.setText((nasaItem.getImageURL().toString()));
