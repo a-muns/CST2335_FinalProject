@@ -122,7 +122,7 @@ public class HomeActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
         alertDialogBuilder.setTitle(R.string.help)
                 .setMessage(R.string.homeHelp)
                 .setPositiveButton(R.string.dismiss, (click, arg) -> { });

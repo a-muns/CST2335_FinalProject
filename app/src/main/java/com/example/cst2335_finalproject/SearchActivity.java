@@ -84,7 +84,7 @@ public class SearchActivity extends BaseActivity implements DatePickerDialog.OnD
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this, R.style.AlertDialogStyle);
         alertDialogBuilder.setTitle(R.string.help)
                 .setMessage(R.string.searchHelp)
                 .setPositiveButton(R.string.dismiss, (click, arg) -> { });

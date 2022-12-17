@@ -16,16 +16,22 @@
         <item name="windowNoTitle">true</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
-
+    <!-- Drawer Style -->
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
         <item name="color">@color/white</item>
     </style>
-
+    <!-- Toolbar style -->
     <style name="ToolbarStyle" parent="Theme.AppCompat">
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColorSecondary">@color/nasa_red</item>
         <item name="background">@color/nasa_blue</item>
+    </style>
+    <!-- AlertDialog Style -->
+    <style name="AlertDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/space_grey</item>
     </style>
 
 </resources>

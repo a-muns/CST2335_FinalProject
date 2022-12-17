@@ -42,6 +42,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/nav_menu" />
+        app:menu="@menu/nav_menu"
+        android:background="@color/space_grey"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="#939393"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
