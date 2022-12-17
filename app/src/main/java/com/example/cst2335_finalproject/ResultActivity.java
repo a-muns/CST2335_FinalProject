@@ -19,7 +19,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -153,21 +155,39 @@ public class ResultActivity extends BaseActivity {
                 nasaItem = new NASAItem(date, title, explanation, imageURL);
                 Log.i("doInBackground", nasaItem.getTitle() + nasaItem.getExplanation() + nasaItem.getImageURL());
 
-                publishProgress(1);
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            // Fill progress bar with for loop
+            for (int i = 0; i < 100; i+=3) {
+                try {
+                    publishProgress(i);
+                    Thread.sleep(5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
             return "Done";
         }
 
-        /**
-         * Update TextViews with nasaItem attributes
-         * @param values
-         */
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
+
+            ProgressBar progressBar = findViewById(R.id.progressBar);
+            progressBar.setProgress(values[0]);
+
+        }
+
+        /**
+         * Update TextViews with nasaItem attributes, dismiss progress bar
+         * @param s
+         */
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
             TextView nasaItemDate = findViewById(R.id.nasaItemDate);
             TextView nasaItemTitle = findViewById(R.id.nasaItemTitle);
             TextView nasaItemExplanation = findViewById(R.id.nasaItemExplanation);
@@ -180,15 +200,16 @@ public class ResultActivity extends BaseActivity {
             // Update imageRedirectButton with imageURL
             Button imageRedirectButton = findViewById(R.id.imageRedirectButton);
             imageRedirectButton.setOnClickListener( click -> {
-                        try {
-                            Intent browserRedirect = new Intent(Intent.ACTION_VIEW, Uri.parse(nasaItem.getImageURL().toString()));
-                            startActivity(browserRedirect);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    });
+                try {
+                    Intent browserRedirect = new Intent(Intent.ACTION_VIEW, Uri.parse(nasaItem.getImageURL().toString()));
+                    startActivity(browserRedirect);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
 
-            Log.i("onProgressUpdate", nasaItem.getTitle() + nasaItem.getExplanation() + nasaItem.getImageURL());
+            ProgressBar progressBar = findViewById(R.id.progressBar);
+            progressBar.setVisibility(View.INVISIBLE);
         }
     }
 }
