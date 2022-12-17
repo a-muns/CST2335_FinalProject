@@ -11,7 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -70,7 +73,17 @@ public class ItemFragment extends Fragment {
         // On click of removeFavouriteButton, remove this item from the database
         Button removeButton = result.findViewById(R.id.removeFavouriteButton);
         removeButton.setOnClickListener( click -> {
-            db.delete(DBOpener.TABLE_NAME, DBOpener.COL_ID + " = ?", new String[] {Long.toString(id)});
+
+            // Snackbar confirms delete
+            FrameLayout itemFragment = result.findViewById(R.id.itemFragment);
+            Snackbar.make(itemFragment, R.string.itemRemoved, Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.okay, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            db.delete(DBOpener.TABLE_NAME,DBOpener.COL_ID + " = ?",
+                                    new String[] {Long.toString(id)});
+                    }})
+                    .show();
         });
 
         return result;

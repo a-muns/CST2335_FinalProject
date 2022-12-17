@@ -51,4 +51,6 @@
         <string name="favouritesHelp">This page contains a list of your saved images. Click a date
             to see its details or delete it from your favourites.</string>
         <string name="remove">Remove</string>
+        <string name="itemRemoved">Item removed from favourites</string>
+        <string name="okay">Okay</string>
 </resources>

@@ -53,4 +53,6 @@
     <string name="favouritesHelp">Esta pagina contiene una lista de sus imagenes ahorradas. Haga
         clic en una fecha para ver sus detalles o eliminarla de tus favoritos.</string>
     <string name="remove">Eliminar</string>
+    <string name="itemRemoved">Elemento eliminado de favoritos</string>
+    <string name="okay">De acuerdo</string>
 </resources>
