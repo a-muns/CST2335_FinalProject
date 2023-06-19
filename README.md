@@ -1,4 +1,4 @@
-# NASA-Image-of-the-Day-App
+# NASA Image of the Day App
 Welcome to the NASA Image of the Day application: an Android app made to facilitate searching the NASA Astronomy Picture of the Day (APOD) API.
 Users can choose a date to query the APOD API, and add dates to a favourites list. Favourites are saved locally to the user's device using an SQLite database.
 <br>By using string resources, the application's native text is dynamically presented in English or Spanish, determined by the language set on the user's device. This does not apply to text drawn from the NASA API (i.e., text from NASA is not translated).
